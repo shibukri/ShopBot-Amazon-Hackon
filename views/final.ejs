@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Final Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <ul>
+        <% data = JSON.parse(data); %>
+        <h1>Personalized Description</h1>
+        <br>
+        <li><strong>Description:</strong>
+            <%= data.description %>
+        </li>
+        <li><strong>Use Cases:</strong>
+            <br>
+                <% data.Use_cases.split('\n').forEach(useCase => { %>
+                    <% if (useCase.trim() !== "") { %>
+                        
+                            <%= useCase.trim() %>
+                            <br>
+                    <% } %>
+                <% }); %>
+            
+        </li>
+        <li><strong>Phrases:</strong>
+            <br>
+                <% data.phrases.split('\n').forEach(phrase => { %>
+                    <% if (phrase.trim() !== "") { %>
+                        
+                            <%= phrase.trim() %>
+                            <br>
+                        
+                    <% } %>
+                <% }); %>
+        </li>
+    </ul>
+    
+
+</body>
+
+</html>

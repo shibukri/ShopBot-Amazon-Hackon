@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Amazon Product Search Results</title>
+</head>
+
+<body>
+    <h1>Amazon Product Search Results</h1>
+    <ul>
+        <% products.forEach(product=> { %>
+            <li>
+                <h2>
+                    <%= product.title %>
+                </h2>
+                <p><strong>Rating:</strong>
+                    <%= product.reviews.rating %> out of 5
+                </p>
+                <p><strong>Total Reviews:</strong>
+                    <%= product.reviews.total_reviews %>
+                </p>
+                <p><strong>URL:</strong> <a href="<%= product.url %>" target="_blank">View on Amazon</a></p>
+                <img src="<%= product.thumbnail %>" alt="<%= product.title %>" width="150" height="150">
+                <a href="/store-asin?asin=<%= product.asin %>">Store ASIN</a>
+            </li>
+            <% }); %>
+    </ul>
+    <a href="/">Back to Search</a>
+</body>
+
+</html>

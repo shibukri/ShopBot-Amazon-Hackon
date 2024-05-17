@@ -1,0 +1,135 @@
+<!-- redirect.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #searchContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    color: #fff; /* Text color */
+    width: 100%;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 1500px; /* Set a maximum width for the search box */
+    margin-left: auto; /* Move the search box to the right */
+    border: 2px solid; /* Add a blue border */
+}
+
+
+        input {
+            padding: 5px;
+            margin-bottom: 10px; /* Add some bottom margin for better spacing */
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .reply-box {
+        background-color: #007bff; /* Blue color */
+        color: #fff; /* Text color */
+        padding: 0px;
+        border-radius: 5px;
+        width: 50%; /* Adjust the width as needed */
+        float: right; /* Float it to the right side */
+        clear: both; /* Clear floating elements */
+        margin-top: 80px; /* Add some margin for spacing */
+        margin-left: 10px;
+}
+    .mine{
+        margin-left: 10px;
+    }
+    #keyword {
+    text-align: center;
+}
+
+        .product-box {
+            background-color: #f5f5f5; /* Light gray background color */
+            border: 1px solid #ddd; /* Gray border */
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .product-rating {
+            font-size: 16px;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+        }
+        .top-bar { 
+        color:black; /* Text color */
+        padding: 10px;
+        text-align: center; /* Center-align text */
+        position: fixed; /* Fix the element in place */
+        top: 0; /* Position it at the top of the viewport */
+        left: 0;
+        right: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <h3>Your Assistant</h3>
+    </div>
+    <div class="reply-box">
+       <div class=mine>
+        <h4>Hi, How may I help you!</h4>
+    </div>
+    </div>
+    <ul>
+        <% searchResults.forEach(product => { %>
+            <li>
+                <div class="product-box">
+                    <div class="product-title"><%= product.title %></div>
+                    <div class="product-rating"><strong>Rating:</strong> <%= product.reviews.rating %> out of 5</div>
+                    <p><strong>Total Reviews:</strong> <%= product.reviews.total_reviews %></p>
+                    <p><strong>URL:</strong> <a href="<%= product.url %>" target="_blank">View on Amazon</a></p>
+                    <img class="product-image" src="<%= product.thumbnail %>" alt="<%= product.title %>" width="150" height="150">
+                    <a href="/store-asin?asin=<%= product.asin %>">Personalized Description</a>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+<footer>
+        <div id="searchContainer">
+            <form action="/search" method="post">
+                <input type="text" id="keyword" name="keyword" placeholder="Type here" required>
+            
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </footer>
+
+    
+</body>
+
+</html>
